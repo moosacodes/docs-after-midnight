@@ -48,3 +48,26 @@ Pick a vibe. Bend it later.
 - Import / export JSON · reset to defaults
 
 Everything syncs through the browser’s storage. Change a slider → the doc updates live.
+
+---
+
+## Install — Chromium crew (Chrome / Edge / Brave)
+
+1. Open `chrome://extensions` (or `edge://extensions`)
+2. Flip on **Developer mode** (top right, like a secret handshake)
+3. **Load unpacked**
+4. Point it at this folder — the one with `manifest.json`
+5. Open a Google Doc. Click the Docs Noir icon. Dim the lights.
+
+Reload the extension after pulls. Hard refresh the doc (`Ctrl+Shift+R`) if it looks stuck on an old vibe.
+
+---
+
+## Install — Firefox
+
+1. Open `about:debugging#/runtime/this-firefox`
+2. **Load Temporary Add-on…**
+3. Pick `manifest.json`
+4. Write something. In the dark. Dramatically.
+
+> Firefox temporary add-ons vanish when the browser restarts. Load it again after a reboot — same two clicks, still worth it.
