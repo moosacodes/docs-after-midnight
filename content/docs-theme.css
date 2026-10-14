@@ -58,22 +58,59 @@ html.gddm-on.gddm-scope-both .docs-companion-app-switcher-container {
   background-image: none !important;
 }
 
-/* Soft outer desk area — light gray inverts to charcoal */
+/*
+  Desk ≈ paper so invert doesn't leave a hard floating "card".
+  Slightly off-white desk → soft charcoal surround after invert.
+*/
 html.gddm-on.gddm-scope-both #docs-editor-container,
 html.gddm-on.gddm-scope-both .kix-appview-editor-container,
 html.gddm-on.gddm-scope-both .kix-appview-editor {
-  background-color: #e8eaed !important;
+  background-color: #f6f7f8 !important;
 }
 
 /* Keep the paper bright white before invert → deep black page */
 html.gddm-on.gddm-scope-both .kix-page,
 html.gddm-on.gddm-scope-both .kix-page-paginated,
 html.gddm-on.gddm-scope-both .kix-page-content-wrapper,
+html.gddm-on.gddm-scope-both .kix-page-background,
 html.gddm-on.gddm-scope-both canvas {
   background-color: #ffffff !important;
 }
 
-/* Toolbar inputs / combo boxes that stay patchy without this */
+/* Kill the boxy page card (borders/shadows invert into bright outlines) */
+html.gddm-on.gddm-scope-both .kix-page,
+html.gddm-on.gddm-scope-both .kix-page-paginated,
+html.gddm-on.gddm-scope-both .kix-page-content-wrapper,
+html.gddm-on.gddm-scope-both .docs-ui-unprintable {
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Flatten chrome seams: header / toolbar / ruler dividers */
+html.gddm-on.gddm-scope-both #docs-chrome,
+html.gddm-on.gddm-scope-both #docs-header,
+html.gddm-on.gddm-scope-both #docs-header-container,
+html.gddm-on.gddm-scope-both #docs-titlebar-container,
+html.gddm-on.gddm-scope-both .docs-titlebar-buttons,
+html.gddm-on.gddm-scope-both #docs-menubars,
+html.gddm-on.gddm-scope-both .docs-menubar,
+html.gddm-on.gddm-scope-both #docs-toolbar-wrapper,
+html.gddm-on.gddm-scope-both .docs-toolbar,
+html.gddm-on.gddm-scope-both .docs-material #docs-toolbar,
+html.gddm-on.gddm-scope-both .docs-ruler,
+html.gddm-on.gddm-scope-both #docs-ruler,
+html.gddm-on.gddm-scope-both #kix-ruler,
+html.gddm-on.gddm-scope-both .kix-rulerview,
+html.gddm-on.gddm-scope-both .docs-butterbar-container {
+  border: none !important;
+  border-bottom: none !important;
+  border-top: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Toolbar inputs — soft, not outlined boxes */
 html.gddm-on.gddm-scope-both .goog-toolbar-button,
 html.gddm-on.gddm-scope-both .goog-toolbar-menu-button,
 html.gddm-on.gddm-scope-both .goog-toolbar-combo-button,
@@ -85,11 +122,37 @@ html.gddm-on.gddm-scope-both .jfk-textinput,
 html.gddm-on.gddm-scope-both .docs-title-input {
   background-color: #ffffff !important;
   color: #202124 !important;
-  border-color: #dadce0 !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 
-html.gddm-on.gddm-scope-both .goog-toolbar-separator {
-  border-color: #dadce0 !important;
+html.gddm-on.gddm-scope-both .goog-toolbar-separator,
+html.gddm-on.gddm-scope-both .goog-toolbar-separator-horizontal,
+html.gddm-on.gddm-scope-both .docs-vertical-separator {
+  border-color: transparent !important;
+  background: transparent !important;
+  opacity: 0 !important;
+  width: 0 !important;
+  min-width: 0 !important;
+}
+
+/* Soften left outline / side widgets so they don't read as cards */
+html.gddm-on.gddm-scope-both .docs-explore-widget,
+html.gddm-on.gddm-scope-both .navigation-widget,
+html.gddm-on.gddm-scope-both .docs-side-widget,
+html.gddm-on.gddm-scope-both .outline-refresh,
+html.gddm-on.gddm-scope-both .docs-companion-app-switcher-container {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Menus/dialogs: soft lift instead of hard frames */
+html.gddm-on.gddm-scope-both .goog-menu,
+html.gddm-on.gddm-scope-both .modal-dialog,
+html.gddm-on.gddm-scope-both .docs-dialog {
+  border: none !important;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.12) !important;
+  border-radius: 12px !important;
 }
 
 /* =========================================================
@@ -130,13 +193,15 @@ html.gddm-on.gddm-scope-page .docs-icon {
 html.gddm-on.gddm-scope-page #docs-editor,
 html.gddm-on.gddm-scope-page #docs-editor-container,
 html.gddm-on.gddm-scope-page .kix-appview-editor {
-  background-color: #e8eaed !important;
+  background-color: #f6f7f8 !important;
 }
 
 html.gddm-on.gddm-scope-page .kix-page,
 html.gddm-on.gddm-scope-page .kix-page-paginated,
 html.gddm-on.gddm-scope-page canvas {
   background-color: #ffffff !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 /* =========================================================
@@ -206,30 +271,37 @@ html.gddm-on.gddm-scope-ui .kix-appview-editor {
 }
 
 /* =========================================================
-   Shared polish
+   Shared polish — seamless, less “old Docs chrome”
    ========================================================= */
 
 html.gddm-on.gddm-soften .goog-menu {
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35) !important;
-  border-radius: 10px !important;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.14) !important;
+  border-radius: 12px !important;
+  border: none !important;
 }
 
 html.gddm-on.gddm-reduce-glare .modal-dialog,
 html.gddm-on.gddm-reduce-glare .docs-dialog {
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.16) !important;
+  border: none !important;
+  border-radius: 14px !important;
 }
 
+/* Quieter scrollbars */
 html.gddm-on ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 html.gddm-on ::-webkit-scrollbar-track {
-  background: rgba(128, 128, 128, 0.2);
+  background: transparent;
 }
 html.gddm-on ::-webkit-scrollbar-thumb {
-  background: rgba(128, 128, 128, 0.45);
-  border-radius: 8px;
+  background: rgba(120, 120, 120, 0.35);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
 }
 html.gddm-on ::-webkit-scrollbar-thumb:hover {
-  background: rgba(128, 128, 128, 0.65);
+  background: rgba(120, 120, 120, 0.55);
+  background-clip: padding-box;
 }
