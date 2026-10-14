@@ -1,0 +1,240 @@
+/* Docs Noir — Google Docs dark theme (driven by CSS variables from theme-engine) */
+
+:root {
+  --gddm-page-bg: #1a1f26;
+  --gddm-toolbar-bg: #12161c;
+  --gddm-surface-bg: #1c222b;
+  --gddm-text: #e8eef5;
+  --gddm-accent: #6eb6ff;
+  --gddm-page-rgb: 26, 31, 38;
+  --gddm-toolbar-rgb: 18, 22, 28;
+  --gddm-surface-rgb: 28, 34, 43;
+  --gddm-ui-opacity: 0.92;
+  --gddm-invert: 88%;
+  --gddm-hue: 182.8deg;
+  --gddm-brightness: 0.93;
+  --gddm-contrast: 105%;
+  --gddm-sepia: 0.08;
+  --gddm-warm-filter: sepia(0.08) saturate(1.1);
+}
+
+html.gddm-on {
+  color-scheme: dark;
+}
+
+/* ---------- UI chrome ---------- */
+html.gddm-on.gddm-scope-both,
+html.gddm-on.gddm-scope-ui {
+  --docs-material-header-button-hover: rgba(var(--gddm-surface-rgb), 0.85);
+}
+
+html.gddm-on.gddm-scope-both body,
+html.gddm-on.gddm-scope-ui body {
+  background-color: var(--gddm-toolbar-bg) !important;
+  color: var(--gddm-text) !important;
+}
+
+/* App frame / menubar / toolbar shells */
+html.gddm-on.gddm-scope-both #docs-chrome,
+html.gddm-on.gddm-scope-ui #docs-chrome,
+html.gddm-on.gddm-scope-both .docs-titlebar-buttons,
+html.gddm-on.gddm-scope-ui .docs-titlebar-buttons,
+html.gddm-on.gddm-scope-both #docs-header,
+html.gddm-on.gddm-scope-ui #docs-header,
+html.gddm-on.gddm-scope-both .docs-material,
+html.gddm-on.gddm-scope-ui .docs-material,
+html.gddm-on.gddm-scope-both .docs-butterbar-container,
+html.gddm-on.gddm-scope-ui .docs-butterbar-container {
+  background-color: rgba(var(--gddm-toolbar-rgb), var(--gddm-ui-opacity)) !important;
+  color: var(--gddm-text) !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease;
+}
+
+html.gddm-on.gddm-scope-both #docs-menubars,
+html.gddm-on.gddm-scope-ui #docs-menubars,
+html.gddm-on.gddm-scope-both .docs-menubar,
+html.gddm-on.gddm-scope-ui .docs-menubar,
+html.gddm-on.gddm-scope-both #docs-toolbar-wrapper,
+html.gddm-on.gddm-scope-ui #docs-toolbar-wrapper,
+html.gddm-on.gddm-scope-both .docs-companion-app-switcher-container,
+html.gddm-on.gddm-scope-ui .docs-companion-app-switcher-container,
+html.gddm-on.gddm-scope-both .docs-title-input-label-inner,
+html.gddm-on.gddm-scope-ui .docs-title-input-label-inner {
+  background: transparent !important;
+  color: var(--gddm-text) !important;
+}
+
+html.gddm-on.gddm-scope-both .docs-icon-img::before,
+html.gddm-on.gddm-scope-ui .docs-icon-img::before,
+html.gddm-on.gddm-scope-both .docs-icon,
+html.gddm-on.gddm-scope-ui .docs-icon {
+  filter: invert(1) hue-rotate(180deg) brightness(1.05);
+}
+
+html.gddm-on.gddm-scope-both .menu-button,
+html.gddm-on.gddm-scope-ui .menu-button,
+html.gddm-on.gddm-scope-both .goog-toolbar-button,
+html.gddm-on.gddm-scope-ui .goog-toolbar-button,
+html.gddm-on.gddm-scope-both .goog-toolbar-menu-button,
+html.gddm-on.gddm-scope-ui .goog-toolbar-menu-button,
+html.gddm-on.gddm-scope-both .docs-title-input,
+html.gddm-on.gddm-scope-ui .docs-title-input {
+  color: var(--gddm-text) !important;
+}
+
+html.gddm-on.gddm-scope-both .goog-menuitem,
+html.gddm-on.gddm-scope-ui .goog-menuitem,
+html.gddm-on.gddm-scope-both .goog-menuitem-content,
+html.gddm-on.gddm-scope-ui .goog-menuitem-content {
+  color: var(--gddm-text) !important;
+}
+
+html.gddm-on.gddm-scope-both .goog-menu,
+html.gddm-on.gddm-scope-ui .goog-menu,
+html.gddm-on.gddm-scope-both .goog-menuitem,
+html.gddm-on.gddm-scope-ui .goog-menuitem,
+html.gddm-on.gddm-scope-both .docs-omnibox-input,
+html.gddm-on.gddm-scope-ui .docs-omnibox-input,
+html.gddm-on.gddm-scope-both .docs-explore-sidebar,
+html.gddm-on.gddm-scope-ui .docs-explore-sidebar,
+html.gddm-on.gddm-scope-both .docs-side-widget,
+html.gddm-on.gddm-scope-ui .docs-side-widget,
+html.gddm-on.gddm-scope-both .docs-sheet-container,
+html.gddm-on.gddm-scope-ui .docs-sheet-container {
+  background-color: var(--gddm-surface-bg) !important;
+  color: var(--gddm-text) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.gddm-on.gddm-soften.gddm-scope-both .goog-menu,
+html.gddm-on.gddm-soften.gddm-scope-ui .goog-menu {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45) !important;
+  border-radius: 10px !important;
+}
+
+html.gddm-on.gddm-scope-both .goog-menuitem-highlight,
+html.gddm-on.gddm-scope-ui .goog-menuitem-highlight,
+html.gddm-on.gddm-scope-both .goog-menuitem-hover,
+html.gddm-on.gddm-scope-ui .goog-menuitem-hover,
+html.gddm-on.gddm-scope-both .goog-toolbar-button-hover,
+html.gddm-on.gddm-scope-ui .goog-toolbar-button-hover,
+html.gddm-on.gddm-scope-both .goog-toolbar-menu-button-hover,
+html.gddm-on.gddm-scope-ui .goog-toolbar-menu-button-hover {
+  background-color: rgba(var(--gddm-surface-rgb), 0.95) !important;
+  filter: brightness(1.15);
+}
+
+/* Dialogs / modals / comments */
+html.gddm-on.gddm-scope-both .modal-dialog,
+html.gddm-on.gddm-scope-ui .modal-dialog,
+html.gddm-on.gddm-scope-both .docs-dialog,
+html.gddm-on.gddm-scope-ui .docs-dialog,
+html.gddm-on.gddm-scope-both .docs-gm-sidebars,
+html.gddm-on.gddm-scope-ui .docs-gm-sidebars,
+html.gddm-on.gddm-scope-both .docos-anchoreddocoview,
+html.gddm-on.gddm-scope-ui .docos-anchoreddocoview,
+html.gddm-on.gddm-scope-both .docos-docoview-root,
+html.gddm-on.gddm-scope-ui .docos-docoview-root,
+html.gddm-on.gddm-scope-both .docs-chat-pane,
+html.gddm-on.gddm-scope-ui .docs-chat-pane {
+  background-color: var(--gddm-surface-bg) !important;
+  color: var(--gddm-text) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+html.gddm-on.gddm-reduce-glare.gddm-scope-both .modal-dialog,
+html.gddm-on.gddm-reduce-glare.gddm-scope-ui .modal-dialog,
+html.gddm-on.gddm-reduce-glare.gddm-scope-both .docs-dialog,
+html.gddm-on.gddm-reduce-glare.gddm-scope-ui .docs-dialog {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55) !important;
+}
+
+html.gddm-on.gddm-scope-both a,
+html.gddm-on.gddm-scope-ui a {
+  color: var(--gddm-accent) !important;
+}
+
+/* Ruler / editor background around page */
+html.gddm-on.gddm-scope-both #docs-editor,
+html.gddm-on.gddm-scope-ui #docs-editor,
+html.gddm-on.gddm-scope-both .kix-appview-editor,
+html.gddm-on.gddm-scope-ui .kix-appview-editor,
+html.gddm-on.gddm-scope-both .docs-editor-container,
+html.gddm-on.gddm-scope-ui .docs-editor-container {
+  background-color: rgba(var(--gddm-page-rgb), 0.55) !important;
+}
+
+html.gddm-on.gddm-scope-both .kix-rulerview,
+html.gddm-on.gddm-scope-ui .kix-rulerview,
+html.gddm-on.gddm-scope-both .kix-page-paginated,
+html.gddm-on.gddm-scope-ui .kix-page-paginated {
+  filter: none;
+}
+
+/* ---------- Document canvas (invert stack) ---------- */
+html.gddm-on.gddm-scope-both .kix-canvas-tile-content,
+html.gddm-on.gddm-scope-page .kix-canvas-tile-content,
+html.gddm-on.gddm-scope-both .kix-page-canvas,
+html.gddm-on.gddm-scope-page .kix-page-canvas,
+html.gddm-on.gddm-scope-both canvas.kix-canvas-tile-content,
+html.gddm-on.gddm-scope-page canvas.kix-canvas-tile-content,
+html.gddm-on.gddm-scope-both .kix-rotatingtilemanager,
+html.gddm-on.gddm-scope-page .kix-rotatingtilemanager {
+  filter:
+    invert(var(--gddm-invert))
+    hue-rotate(var(--gddm-hue))
+    brightness(var(--gddm-brightness))
+    contrast(var(--gddm-contrast))
+    var(--gddm-warm-filter) !important;
+}
+
+/* Broader editor surface fallback when tile classes shift */
+html.gddm-on.gddm-scope-both .kix-page,
+html.gddm-on.gddm-scope-page .kix-page {
+  background-color: var(--gddm-page-bg) !important;
+}
+
+html.gddm-on.gddm-scope-both .kix-appview-editor > div > canvas,
+html.gddm-on.gddm-scope-page .kix-appview-editor > div > canvas,
+html.gddm-on.gddm-scope-both .kix-zoomdocumentplugin-outer,
+html.gddm-on.gddm-scope-page .kix-zoomdocumentplugin-outer canvas {
+  filter:
+    invert(var(--gddm-invert))
+    hue-rotate(var(--gddm-hue))
+    brightness(var(--gddm-brightness))
+    contrast(var(--gddm-contrast))
+    var(--gddm-warm-filter) !important;
+}
+
+/* Un-invert images / media so they stay natural */
+html.gddm-on.gddm-preserve-images.gddm-scope-both .kix-canvas-tile-content img,
+html.gddm-on.gddm-preserve-images.gddm-scope-page .kix-canvas-tile-content img,
+html.gddm-on.gddm-preserve-images.gddm-scope-both .kix-page img,
+html.gddm-on.gddm-preserve-images.gddm-scope-page .kix-page img,
+html.gddm-on.gddm-preserve-images.gddm-scope-both img.kix-embeddedobject-image,
+html.gddm-on.gddm-preserve-images.gddm-scope-page img.kix-embeddedobject-image,
+html.gddm-on.gddm-preserve-images.gddm-scope-both .kix-embeddedobject-view,
+html.gddm-on.gddm-preserve-images.gddm-scope-page .kix-embeddedobject-view {
+  filter:
+    invert(var(--gddm-invert))
+    hue-rotate(var(--gddm-hue))
+    brightness(1)
+    contrast(100%) !important;
+}
+
+/* Scrollbars (Chromium) */
+html.gddm-on ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+html.gddm-on ::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.25);
+}
+html.gddm-on ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+}
+html.gddm-on ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
