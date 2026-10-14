@@ -24,10 +24,24 @@
     const contrast = clamp(Number(values.contrast) || 100, 80, 140);
     const warmth = clamp(Number(values.warmth) || 0, 0, 50);
 
-    const invertAmount = (pageDim / 100) * 100;
-    const brightness = 1 - pageDim / 100 * 0.08;
+    // Full invert at 100; lower pageDim softens toward the original page.
+    const invertAmount = pageDim;
+    const brightness = clamp(1.02 - (pageDim / 100) * 0.06 + (uiDim - 90) / 500, 0.85, 1.15);
     const sepia = warmth / 100;
-    const hue = 180 + warmth * 0.35;
+    const saturate = 1 + warmth / 90;
+    const hue = 180 + warmth * 0.25;
+
+    // Build complete filter strings in JS — never splice multi-function vars into CSS filters.
+    const mainFilter = [
+      `invert(${invertAmount}%)`,
+      `hue-rotate(${hue}deg)`,
+      `brightness(${brightness})`,
+      `contrast(${contrast}%)`,
+      `sepia(${sepia})`,
+      `saturate(${saturate})`,
+    ].join(" ");
+
+    const undoFilter = `invert(${invertAmount}%) hue-rotate(${hue}deg)`;
 
     const page = hexToRgb(values.pageBg);
     const toolbar = hexToRgb(values.toolbarBg);
@@ -43,12 +57,8 @@
       "--gddm-toolbar-rgb": `${toolbar.r}, ${toolbar.g}, ${toolbar.b}`,
       "--gddm-surface-rgb": `${surface.r}, ${surface.g}, ${surface.b}`,
       "--gddm-ui-opacity": String(clamp(uiDim / 100, 0.4, 1)),
-      "--gddm-invert": `${invertAmount}%`,
-      "--gddm-hue": `${hue}deg`,
-      "--gddm-brightness": String(clamp(brightness, 0.85, 1.05)),
-      "--gddm-contrast": `${contrast}%`,
-      "--gddm-sepia": String(sepia),
-      "--gddm-warm-filter": `sepia(${sepia}) saturate(${1 + warmth / 80})`,
+      "--gddm-filter": mainFilter,
+      "--gddm-uninvert": undoFilter,
     };
   }
 
@@ -57,7 +67,8 @@
     if (!el) {
       el = doc.createElement("style");
       el.id = STYLE_ID;
-      (doc.documentElement || doc.head || doc).appendChild(el);
+      const parent = doc.head || doc.documentElement;
+      parent.appendChild(el);
     }
     return el;
   }
@@ -70,19 +81,22 @@
     const values = global.GDDMPresets.resolveThemeValues(settings);
     const vars = buildCssVars(values);
 
+    root.classList.remove(
+      "gddm-on",
+      "gddm-scope-both",
+      "gddm-scope-page",
+      "gddm-scope-ui",
+      "gddm-preserve-images",
+      "gddm-soften",
+      "gddm-reduce-glare"
+    );
+
     if (!active) {
       root.removeAttribute(ROOT_ATTR);
-      root.classList.remove(
-        "gddm-on",
-        "gddm-scope-both",
-        "gddm-scope-page",
-        "gddm-scope-ui",
-        "gddm-preserve-images",
-        "gddm-soften",
-        "gddm-reduce-glare"
-      );
+      root.style.removeProperty("filter");
       const existing = doc.getElementById(STYLE_ID);
       if (existing) existing.textContent = "";
+      Object.keys(vars).forEach((key) => root.style.removeProperty(key));
       return;
     }
 
@@ -98,7 +112,34 @@
     const lines = Object.keys(vars)
       .map((key) => `${key}: ${vars[key]};`)
       .join("\n  ");
-    ensureStyleEl(doc).textContent = `:root, html {\n  ${lines}\n}`;
+
+    // Inline the filter on html for maximum reliability (scope: both).
+    ensureStyleEl(doc).textContent = `
+:root, html {
+  ${lines}
+}
+html.gddm-on.gddm-scope-both {
+  filter: ${vars["--gddm-filter"]} !important;
+}
+html.gddm-on.gddm-scope-page #docs-editor,
+html.gddm-on.gddm-scope-page #docs-editor-container,
+html.gddm-on.gddm-scope-page .kix-appview-editor {
+  filter: ${vars["--gddm-filter"]} !important;
+}
+html.gddm-on.gddm-preserve-images.gddm-scope-both img,
+html.gddm-on.gddm-preserve-images.gddm-scope-both video,
+html.gddm-on.gddm-preserve-images.gddm-scope-both svg:not(:root),
+html.gddm-on.gddm-preserve-images.gddm-scope-both .docs-icon-img,
+html.gddm-on.gddm-preserve-images.gddm-scope-both .docs-icon-img-container,
+html.gddm-on.gddm-preserve-images.gddm-scope-both .kix-embeddedobject-image,
+html.gddm-on.gddm-preserve-images.gddm-scope-both .kix-embeddedobject-view,
+html.gddm-on.gddm-preserve-images.gddm-scope-page #docs-editor img,
+html.gddm-on.gddm-preserve-images.gddm-scope-page #docs-editor video,
+html.gddm-on.gddm-preserve-images.gddm-scope-page .kix-embeddedobject-image,
+html.gddm-on.gddm-preserve-images.gddm-scope-page .kix-embeddedobject-view {
+  filter: ${vars["--gddm-uninvert"]} !important;
+}
+`.trim();
 
     Object.keys(vars).forEach((key) => {
       root.style.setProperty(key, vars[key]);
