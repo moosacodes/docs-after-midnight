@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Docs Noir</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <header class="hero">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div class="brand-text">
+          <h1>Docs Noir</h1>
+          <p>Shape the night for Google Docs</p>
+        </div>
+        <label class="switch" title="Enable dark mode">
+          <input type="checkbox" id="enabled" />
+          <span class="slider"></span>
+        </label>
+      </header>
+
+      <section class="panel">
+        <div class="label-row">
+          <span>Presets</span>
+          <span class="hint" id="preset-name">Midnight</span>
+        </div>
+        <div class="presets" id="presets" role="listbox" aria-label="Theme presets"></div>
+      </section>
+
+      <section class="panel">
+        <div class="label-row">
+          <span>Scope</span>
+        </div>
+        <div class="segmented" id="scope">
+          <button type="button" data-scope="both" class="active">UI + page</button>
+          <button type="button" data-scope="page">Page only</button>
+          <button type="button" data-scope="ui">UI only</button>
+        </div>
+      </section>
+
+      <section class="panel sliders">
+        <label>
+          <span>Page dim <em id="pageDim-val">88</em></span>
+          <input type="range" id="pageDim" min="0" max="100" />
+        </label>
+        <label>
+          <span>UI dim <em id="uiDim-val">92</em></span>
+          <input type="range" id="uiDim" min="40" max="100" />
+        </label>
+        <label>
+          <span>Contrast <em id="contrast-val">105</em></span>
+          <input type="range" id="contrast" min="80" max="140" />
+        </label>
+        <label>
+          <span>Warmth <em id="warmth-val">8</em></span>
+          <input type="range" id="warmth" min="0" max="50" />
+        </label>
+      </section>
+
+      <footer class="footer">
+        <a href="#" id="open-options">Full options</a>
+        <span class="tag">Local only · no tracking</span>
+      </footer>
+    </div>
+    <script src="../lib/browser.js"></script>
+    <script src="../lib/presets.js"></script>
+    <script src="../lib/storage.js"></script>
+    <script src="popup.js"></script>
+  </body>
+</html>
