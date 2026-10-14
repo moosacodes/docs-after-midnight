@@ -71,3 +71,46 @@ Reload the extension after pulls. Hard refresh the doc (`Ctrl+Shift+R`) if it lo
 4. Write something. In the dark. Dramatically.
 
 > Firefox temporary add-ons vanish when the browser restarts. Load it again after a reboot — same two clicks, still worth it.
+
+---
+
+## Permissions (short and honest)
+
+| Permission | Why |
+| --- | --- |
+| `storage` | Remembers your theme so it doesn’t ghost you on reload |
+| `docs.google.com/document/*` | Only the actual Docs editor — not your whole Google life |
+
+That’s it. No analytics. No “phone home.” Your settings stay in the browser.
+
+---
+
+## What’s in the box
+
+```
+manifest.json       # the passport (currently v1.2.0)
+background.js       # quiet service worker
+content/            # theme engine + Docs CSS + content script
+popup/              # quick controls with atmosphere
+options/            # full customization lab
+lib/                # presets + storage helpers
+icons/              # little moon energy
+scripts/            # icon generator if you want to remix
+```
+
+---
+
+## Nerd corner
+
+- Docs renders the page on a **canvas**, so we can’t restyle individual text nodes with normal CSS.
+- Default scope (**UI + page**) runs a smart `invert` + `hue-rotate` stack, forces light surfaces so they become dark, then un-inverts images so photos don’t look haunted.
+- Seamless mode strips the old “floating card” borders, toolbar seams, and ruler lines that get loud once everything else goes dark.
+- If Google renames a class tomorrow and something looks weird, the fix usually lives in `content/docs-theme.css`. PRs welcome — bring snacks.
+
+---
+
+## License energy
+
+Use it. Fork it. Make your own preset called “3am Essay Panic.” Just don’t ship spyware in a Docs skin and call it noir.
+
+Stay dim.
