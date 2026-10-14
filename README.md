@@ -29,3 +29,22 @@ Pick a vibe. Bend it later.
 | **Forest Ink** | Green undertones. Study-session forest. |
 | **Warm Ember** | Amber glow. Less clinical, more lamp. |
 | **Custom** | You’re the DP now. Sliders + colors. |
+
+---
+
+## The knobs
+
+**Popup (fast):**
+- Master on/off
+- Preset swatches
+- Scope: UI + page · page only · UI only
+- Page dim · UI dim · contrast · warmth
+
+**Options (deep cut):**
+- Color craft (page / toolbar / surfaces / accent)
+- Preserve images & media
+- Soften menus, reduce dialog glare
+- Schedule: always · follow system · local time window
+- Import / export JSON · reset to defaults
+
+Everything syncs through the browser’s storage. Change a slider → the doc updates live.
