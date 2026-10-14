@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Docs Noir — Options</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <div class="atmosphere" aria-hidden="true"></div>
+    <main class="page">
+      <header class="top">
+        <div>
+          <p class="eyebrow">Docs Noir</p>
+          <h1>Tune the night</h1>
+          <p class="lede">Presets, color craft, schedule, and export — all stored locally on your browser.</p>
+        </div>
+        <label class="switch large">
+          <input type="checkbox" id="enabled" />
+          <span class="slider"></span>
+          <span class="switch-label">Dark mode</span>
+        </label>
+      </header>
+
+      <section class="card">
+        <h2>Presets</h2>
+        <p class="section-copy">Start from a mood, then bend it.</p>
+        <div class="preset-grid" id="presets"></div>
+      </section>
+
+      <section class="card">
+        <h2>Colors</h2>
+        <p class="section-copy">Choosing a color switches you into Custom.</p>
+        <div class="color-grid">
+          <label>Page background <input type="color" id="pageBg" /></label>
+          <label>Toolbar <input type="color" id="toolbarBg" /></label>
+          <label>Surfaces <input type="color" id="surfaceBg" /></label>
+          <label>Text emphasis <input type="color" id="textEmphasis" /></label>
+          <label>Accent <input type="color" id="accent" /></label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Intensity</h2>
+        <div class="sliders">
+          <label>
+            <span>Page dim <em id="pageDim-val">88</em></span>
+            <input type="range" id="pageDim" min="0" max="100" />
+          </label>
+          <label>
+            <span>UI dim <em id="uiDim-val">92</em></span>
+            <input type="range" id="uiDim" min="40" max="100" />
+          </label>
+          <label>
+            <span>Contrast <em id="contrast-val">105</em></span>
+            <input type="range" id="contrast" min="80" max="140" />
+          </label>
+          <label>
+            <span>Warmth <em id="warmth-val">8</em></span>
+            <input type="range" id="warmth" min="0" max="50" />
+          </label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Behavior</h2>
+        <div class="field-row">
+          <label for="scope">Theme scope</label>
+          <select id="scope">
+            <option value="both">UI + document page</option>
+            <option value="page">Document page only</option>
+            <option value="ui">UI chrome only</option>
+          </select>
+        </div>
+        <div class="checks">
+          <label><input type="checkbox" id="preserveImages" /> Preserve images &amp; media colors</label>
+          <label><input type="checkbox" id="softenMenus" /> Soften menus &amp; shadows</label>
+          <label><input type="checkbox" id="reduceGlare" /> Reduce glare on dialogs</label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Schedule</h2>
+        <p class="section-copy">Keep the master switch on; schedule decides when the theme actually applies.</p>
+        <div class="field-row">
+          <label for="scheduleMode">Mode</label>
+          <select id="scheduleMode">
+            <option value="always">Always when enabled</option>
+            <option value="system">Follow system dark mode</option>
+            <option value="window">Between local times</option>
+          </select>
+        </div>
+        <div class="time-row" id="time-row">
+          <label>Start <input type="time" id="scheduleStart" /></label>
+          <label>End <input type="time" id="scheduleEnd" /></label>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Backup</h2>
+        <div class="actions">
+          <button type="button" id="exportBtn" class="btn">Export JSON</button>
+          <button type="button" id="importBtn" class="btn">Import JSON</button>
+          <button type="button" id="resetBtn" class="btn danger">Reset defaults</button>
+        </div>
+        <textarea id="io" rows="8" spellcheck="false" placeholder="Paste settings JSON here to import…"></textarea>
+        <p class="status" id="status" role="status"></p>
+      </section>
+
+      <footer class="foot">
+        <span>Works on Chrome, Edge, Brave, Firefox · Google Docs document pages</span>
+      </footer>
+    </main>
+
+    <script src="../lib/browser.js"></script>
+    <script src="../lib/presets.js"></script>
+    <script src="../lib/storage.js"></script>
+    <script src="options.js"></script>
+  </body>
+</html>
